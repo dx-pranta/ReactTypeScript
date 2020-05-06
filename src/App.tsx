@@ -13,7 +13,6 @@ const App: React.FC = (props) => {
 
 const Styles = {
   container: {
-
   }
 }
 

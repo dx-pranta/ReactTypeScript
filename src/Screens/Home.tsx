@@ -17,13 +17,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 
-import Dhaka from './Dhaka';
-import Tangail from './Tangail'
-import Chittagong from './Chittagong';
-import Comilla from './Comilla';
+import City from './City';
 
 const Home: React.FC = (props: any) => {
-    console.log(props.history);
 
 
     const [drawerVisibility, setDrawerVisibility] = useState(false);
@@ -77,14 +73,23 @@ const Home: React.FC = (props: any) => {
                 </Drawer>
             </div>
 
-            <Route path='/Dhaka' component={Dhaka} />
-            <Route path='/Tangail' component={Tangail} />
-            <Route path='/Chittagong' component={Chittagong} />
-            <Route path='/Comilla' component={Comilla} />
-
+            <Route
+                path='/Dhaka'
+                render={(props) => <City props={props} cityName="Dhaka" />}
+            />
+            <Route
+                path='/Tangail'
+                render={(props) => <City props={props} cityName="Tangail" />}
+            />
+            <Route
+                path='/Chittagong'
+                render={(props) => <City props={props} cityName="Chittagong" />}
+            />
+            <Route
+                path='/Comilla'
+                render={(props) => <City props={props} cityName="Comilla" />}
+            />
         </div>
-
-
     )
 }
 
