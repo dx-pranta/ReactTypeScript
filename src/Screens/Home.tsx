@@ -16,7 +16,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
-
+import Counter from '../Components/Counter'
 import City from './City';
 
 const Home: React.FC = (props: any) => {
@@ -34,7 +34,7 @@ const Home: React.FC = (props: any) => {
 
 
     return (
-        <div>
+        <div className="App">
             <div style={Styles.container}>
                 <AppBar style={Styles.appBar}>
                     <Toolbar>
@@ -62,7 +62,7 @@ const Home: React.FC = (props: any) => {
                     <Divider />
 
                     <List>
-                        {['Dhaka', 'Tangail', 'Chittagong', 'Comilla'].map((text, index) => (
+                        {['Dhaka', 'Tangail', 'Chittagong', 'Comilla', "Counter"].map((text, index) => (
                             <ListItem button key={text} onClick={() => props.history.push(`/${text}`)}>
                                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                 <ListItemText primary={text} />
@@ -88,6 +88,10 @@ const Home: React.FC = (props: any) => {
             <Route
                 path='/Comilla'
                 render={(props) => <City props={props} cityName="Comilla" />}
+            />
+            <Route
+                path='/Counter'
+                component={Counter}
             />
         </div>
     )

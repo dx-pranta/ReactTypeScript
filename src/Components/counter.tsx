@@ -1,35 +1,28 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-interface Person {
-    firstName: string;
-    lastNmae: string;
-}
-interface Props {
-    text: string;
-    ok?: boolean;
-    i?: number;
-    fn?: (bob: string) => string;
-    person: Person;
-    //handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-const Counter: React.FC<Props> = () => {
-    const [count, setCount] = useState<any>(1);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const divRef = useRef<HTMLInputElement>(null);
+import { useSelector, useDispatch } from 'react-redux';
+
+import { increment, decrement } from '../store/actions'
+
+
+
+const Counter: React.FC = () => {
+
+    const counter = useSelector((state: any) => state.counter);
+    const dispatch = useDispatch();
 
     const handleIncrement = () => {
-        setCount(count + 1);
+        dispatch(increment(1));
     }
 
     const handleDecrement = () => {
-        setCount(count - 1);
+        dispatch(decrement(1));
     }
 
     return (
 
-        <div>
-            <h1>{count}</h1>
+        <div style={Styles.container}>
+            <h1>{counter}</h1>
             <Button
                 style={Styles.button}
                 variant="contained"
@@ -44,11 +37,7 @@ const Counter: React.FC<Props> = () => {
             >
                 Decrement
             </Button>
-            <div ref={divRef}>
-                <TextField
-                    ref={inputRef}
-                />
-            </div>
+
         </div>
     )
 }
@@ -58,6 +47,9 @@ const Styles = {
         color: 'white',
         backgroundColor: 'blue',
         margin: 10,
+    },
+    container: {
+        marginTop: 100,
     }
 }
 
