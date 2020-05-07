@@ -1,4 +1,9 @@
-const counterReducer = (state = 0, action: any) => {
+interface actionType {
+    type: string,
+    payload: number
+}
+
+const counterReducer = (state = 0, action: actionType) => {
     switch (action.type) {
         case 'INCREMENT':
             return state + action.payload;
