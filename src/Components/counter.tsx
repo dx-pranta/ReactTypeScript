@@ -1,29 +1,23 @@
-import React, { useState, useReducer } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button';
-import CounterReducer from '../store/reducers/counterReducer';
-import {initialState} from '../store/reducers/counterReducer';
 import {useSelector, useDispatch} from 'react-redux'
 
 
-import { increment, decrement,itemsFetchData } from '../store/actions'
+import { increment, itemsFetchData } from '../store/actions'
 
 
 
 interface stateType {
-    counter: Function,
-    isLogged: Function,
-}
-
-interface ReducerType {
-    counter: number,
+    counterReducer: {
+        counter: number
+    }
     isLogged: boolean
 }
 
+
 const Counter: React.FC = () => {
-
-    // const [state, dispatch] = useReducer(CounterReducer, initialState);
-
-    const counter = useSelector((state: stateType) => state.counter);
+    const counterState = useSelector((state: stateType) => state.counterReducer);
+    
     const dispatch = useDispatch();
 
     const handleIncrement = () => {
@@ -37,7 +31,7 @@ const Counter: React.FC = () => {
     return (
 
         <div style={Styles.container}>
-            <h1>{counter}</h1>
+            <h1>{counterState.counter}</h1>
             <Button
                 style={Styles.button}
                 variant="contained"
