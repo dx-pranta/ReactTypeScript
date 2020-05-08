@@ -4,13 +4,24 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { createStore } from 'redux';
+import { createStore,applyMiddleware } from 'redux';
 import allReducers from './store/reducers'
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
+
+
+const composeEnhancers =
+      typeof window === 'object' &&
+      (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk),
+  // other store enhancers if any
+);
 const myStore = createStore(
   allReducers,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  enhancer
 );
 
 ReactDOM.render(

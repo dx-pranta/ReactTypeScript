@@ -3,7 +3,9 @@ interface actionType {
     payload: number
 }
 
-const counterReducer = (state = 0, action: actionType) => {
+export const initialState = 99;
+
+const counterReducer = (state = initialState, action: actionType) => {
     switch (action.type) {
         case 'INCREMENT':
             return state + action.payload;

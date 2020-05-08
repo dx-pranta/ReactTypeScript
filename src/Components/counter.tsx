@@ -1,9 +1,11 @@
 import React, { useState, useReducer } from 'react'
 import Button from '@material-ui/core/Button';
 import CounterReducer from '../store/reducers/counterReducer';
+import {initialState} from '../store/reducers/counterReducer';
+import {useSelector, useDispatch} from 'react-redux'
 
 
-import { increment, decrement } from '../store/actions'
+import { increment, decrement,itemsFetchData } from '../store/actions'
 
 
 
@@ -19,24 +21,23 @@ interface ReducerType {
 
 const Counter: React.FC = () => {
 
-    const [state, dispatch] = useReducer(CounterReducer, 0);
+    // const [state, dispatch] = useReducer(CounterReducer, initialState);
 
-    // const counter = useSelector((state: stateType) => state.counter);
-    // const dispatch = useDispatch();
+    const counter = useSelector((state: stateType) => state.counter);
+    const dispatch = useDispatch();
 
     const handleIncrement = () => {
-        console.log(state);
         dispatch(increment(1));
     }
 
     const handleDecrement = () => {
-        dispatch(decrement(1));
+        dispatch(itemsFetchData('http://dummy.restapiexample.com/api/v1/employees'));
     }
 
     return (
 
         <div style={Styles.container}>
-            <h1>{state}</h1>
+            <h1>{counter}</h1>
             <Button
                 style={Styles.button}
                 variant="contained"
