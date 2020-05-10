@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const increment = (number: number) => {
     return ({
         type: 'INCREMENT',
@@ -12,19 +14,54 @@ export const decrement = (number: number) => {
     });
 }
 
+export const fetchDataRequest = () => {
+    return {
+        type: 'FETCH_DATA_REQUEST'
+    }
+}
 
-export function itemsFetchData(url : string) {
+export const fetchDataSuccess = (data: any) => {
+    return {
+        type: 'FETCH_DATA_SUCCESS',
+        payload: data
+    }
+}
+
+export const fetchDataFailure = (error: any) => {
+    return {
+        type: 'FETCH_DATA_SUCCESS',
+        payloa: error
+    }
+}
+
+export const fetchData = (url: string) => {
+    return async function (dispatch: any) {
+        dispatch(fetchDataRequest());
+        try {
+            const response = await axios.get(url);
+            const data = response.data;
+            dispatch(fetchDataSuccess(data.data));
+            dispatch(decrement(1));
+        }
+        catch (e) {
+            dispatch(fetchDataFailure(e.message));
+        }
+    }
+}
+
+
+export function itemsFetchData(url: string) {
     return (dispatch: any) => {
 
         fetch(url)
             .then((response) => {
                 console.log('Got Response');
-                console.log(response,'Response Log');                
+                console.log(response, 'Response Log');
             })
 
             .then(() => {
                 setTimeout(
-                    function() {
+                    function () {
                         dispatch(decrement(1))
                     },
                     3000

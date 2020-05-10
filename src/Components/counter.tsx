@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 
-import { increment, itemsFetchData } from '../store/actions'
+import { increment, itemsFetchData, fetchData } from '../store/actions'
 
 
 
@@ -17,7 +17,7 @@ interface stateType {
 
 const Counter: React.FC = () => {
     const counterState = useSelector((state: stateType) => state.counterReducer);
-    
+
     const dispatch = useDispatch();
 
     const handleIncrement = () => {
@@ -25,7 +25,7 @@ const Counter: React.FC = () => {
     }
 
     const handleDecrement = () => {
-        dispatch(itemsFetchData('http://dummy.restapiexample.com/api/v1/employees'));
+        dispatch(fetchData('http://dummy.restapiexample.com/api/v1/employees'));
     }
 
     return (
