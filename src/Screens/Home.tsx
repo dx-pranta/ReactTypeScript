@@ -16,17 +16,34 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
-import Counter from '../Components/counter'
+import Counter from '../Components/Counter';
 import City from './City';
 
 const Home: React.FC = (props: any) => {
 
 
     const [drawerVisibility, setDrawerVisibility] = useState(false);
+    const [coordinate, setCoordinate] = useState({
+        Dhaka: {
+            latitude: 23.810331,
+            longitude: 90.412521,
+        },
+        Tangail: {
+            latitude: 24.249981,
+            longitude: 89.920029,
+        },
+        Chittagong: {
+            latitude: 22.356852,
+            longitude: 91.783180,
+        },
+        Comilla: {
+            latitude: 23.460657,
+            longitude: 91.180908,
+        },
+    });
 
     const handleClickMenu = () => {
         setDrawerVisibility(true);
-
     }
     const closeDrawer = () => {
         setDrawerVisibility(false);
@@ -75,19 +92,19 @@ const Home: React.FC = (props: any) => {
 
             <Route
                 path='/Dhaka'
-                render={(props) => <City props={props} cityName="Dhaka" />}
+                render={(props) => <City props={props} cityName="Dhaka" coordinate={coordinate.Dhaka} />}
             />
             <Route
                 path='/Tangail'
-                render={(props) => <City props={props} cityName="Tangail" />}
+                render={(props) => <City props={props} cityName="Tangail" coordinate={coordinate.Tangail} />}
             />
             <Route
                 path='/Chittagong'
-                render={(props) => <City props={props} cityName="Chittagong" />}
+                render={(props) => <City props={props} cityName="Chittagong" coordinate={coordinate.Chittagong} />}
             />
             <Route
                 path='/Comilla'
-                render={(props) => <City props={props} cityName="Comilla" />}
+                render={(props) => <City props={props} cityName="Comilla" coordinate={coordinate.Comilla} />}
             />
             <Route
                 path='/Counter'

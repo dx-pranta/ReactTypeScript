@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
+
 import { useSelector, useDispatch } from 'react-redux'
 
-
-import { increment, itemsFetchData, fetchData } from '../store/actions'
+import { increment, fetchData } from '../store/actions'
 
 
 
@@ -11,7 +11,11 @@ interface stateType {
     counterReducer: {
         counter: number
     }
-    isLogged: boolean
+    apiReducer: {
+        loading: boolean,
+        data: never[],
+        error: string,
+    }
 }
 
 
