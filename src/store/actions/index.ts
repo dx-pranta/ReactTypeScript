@@ -29,8 +29,8 @@ export const fetchDataSuccess = (data: any) => {
 
 export const fetchDataFailure = (error: any) => {
     return {
-        type: 'FETCH_DATA_SUCCESS',
-        payloa: error
+        type: 'FETCH_DATA_FAILURE',
+        payload: error
     }
 }
 
@@ -40,10 +40,12 @@ export const fetchData = (url: string) => {
         try {
             const response = await axios.get(url);
             const data = response.data;
+            console.log("response: ", response)
             dispatch(fetchDataSuccess(data.data));
             dispatch(decrement(1));
         }
         catch (e) {
+            console.log("error: ", e)
             dispatch(fetchDataFailure(e.message));
         }
     }
