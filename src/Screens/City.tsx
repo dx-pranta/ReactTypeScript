@@ -24,8 +24,7 @@ const City: React.FC<CityProps> = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // console.log(props.coordinate);
-        dispatch(fetchData(`https://api.darksky.net/forecast/ed06e25eb482c6745afa284e59a0e814/${props.coordinate.latitude},${props.coordinate.longitude}`));
+        dispatch(fetchData(`https://api.openweathermap.org/data/2.5/weather?lat=${props.coordinate.latitude}&lon=${props.coordinate.longitude}&appid=98581d3025d63d9283f91a59e3334439`));
 
     }, [props.props.location, props.coordinate, dispatch]);
 

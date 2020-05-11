@@ -35,9 +35,10 @@ export const fetchDataFailure = (error: any) => {
 }
 
 export const fetchData = (url: string) => {
+    
     return async function (dispatch: any) {
         dispatch(fetchDataRequest());
-        try {
+        try {            
             const response = await axios.get(url);
             const data = response.data;
             console.log("response: ", response)

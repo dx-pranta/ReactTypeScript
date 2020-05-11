@@ -16,7 +16,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
-import Counter from '../Components/Counter';
+import Counter from '../Components/counter';
 import City from './City';
 
 const Home: React.FC = (props: any) => {
