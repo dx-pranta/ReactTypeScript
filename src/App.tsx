@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Home from './Screens/Home';
 import { Route, } from 'react-router-dom';
+import { hot } from "react-hot-loader/root";
 
 const App: React.FC = (props) => {
   return (
@@ -16,4 +17,4 @@ const Styles = {
   }
 }
 
-export default App;
+export default hot(App);
