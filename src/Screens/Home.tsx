@@ -16,14 +16,14 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
-import Counter from '../Components/counter';
 import City from './City';
+import Counter from '../Components/Counter'
 
 const Home: React.FC = (props: any) => {
 
 
     const [drawerVisibility, setDrawerVisibility] = useState(false);
-    const [coordinate, setCoordinate] = useState({
+    const coordinate = {
         Dhaka: {
             latitude: 23.810331,
             longitude: 90.412521,
@@ -40,7 +40,7 @@ const Home: React.FC = (props: any) => {
             latitude: 23.460657,
             longitude: 91.180908,
         },
-    });
+    };
 
     const handleClickMenu = () => {
         setDrawerVisibility(true);

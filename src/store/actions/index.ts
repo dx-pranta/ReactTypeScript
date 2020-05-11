@@ -1,49 +1,47 @@
+import * as actions from '../actionType';
 import axios from 'axios';
 
 export const increment = (number: number) => {
     return ({
-        type: 'INCREMENT',
+        type: actions.INCREMENT,
         payload: number
     });
 }
 
 export const decrement = (number: number) => {
     return ({
-        type: 'DECREMENT',
+        type: actions.DECREMENT,
         payload: number
     });
 }
 
 export const fetchDataRequest = () => {
     return {
-        type: 'FETCH_DATA_REQUEST'
+        type: actions.FETCH_DATA_REQUEST
     }
 }
 
 export const fetchDataSuccess = (data: any) => {
     return {
-        type: 'FETCH_DATA_SUCCESS',
+        type: actions.FETCH_DATA_SUCCESS,
         payload: data
     }
 }
 
 export const fetchDataFailure = (error: any) => {
     return {
-        type: 'FETCH_DATA_FAILURE',
+        type: actions.FETCH_DATA_FAILURE,
         payload: error
     }
 }
 
 export const fetchData = (url: string) => {
-    
+
     return async function (dispatch: any) {
         dispatch(fetchDataRequest());
-        try {            
+        try {
             const response = await axios.get(url);
-            const data = response.data;
-            console.log("response: ", response)
-            dispatch(fetchDataSuccess(data.data));
-            dispatch(decrement(1));
+            dispatch(fetchDataSuccess(response.data));
         }
         catch (e) {
             console.log("error: ", e)

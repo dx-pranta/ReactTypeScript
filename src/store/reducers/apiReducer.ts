@@ -20,7 +20,7 @@ const apiReducer = (state = initialState, action: actionType) => {
             return {
                 ...state,
                 loading: false,
-                data: action.payload,
+                data: action.payload ? action.payload : [],
                 error: ''
             }
         case "FETCH_DATA_FAILURE":
