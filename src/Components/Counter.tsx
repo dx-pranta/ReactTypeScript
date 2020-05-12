@@ -50,7 +50,7 @@ const Counter: React.FC = () => {
             >
                 Decrement
             </Button>
-
+            
         </div>
     )
 }
