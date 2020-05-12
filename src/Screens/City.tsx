@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchData } from '../store/actions'
-import { Viewer, Entity, Camera } from "resium";
-import { Cartesian3, createWorldTerrain } from "cesium";
+import { Viewer, Entity, Camera, PolygonGraphics } from "resium";
+import { Cartesian3, createWorldTerrain, Color } from "cesium";
 const terrainProvider = createWorldTerrain();
 
 
@@ -35,8 +35,17 @@ const City: React.FC<CityProps> = (props) => {
     //const counterState = useSelector((state: stateType) => state.counterReducer);
     //const weatherState = useSelector((state: stateType) => state.apiReducer);
     const position = Cartesian3.fromDegrees(props.coordinate.longitude, props.coordinate.latitude, 300);
+
+    const position1 = Cartesian3.fromDegrees(props.coordinate.longitude + .001, props.coordinate.latitude + .001, 300);
     const direction = Cartesian3.fromDegrees(90, 180, 180);
     const pointGraphics = { pixelSize: 10 };
+    const positionArray = Cartesian3.fromDegreesArray([
+        props.coordinate.longitude + .0001, props.coordinate.latitude + .0001,
+        props.coordinate.longitude + .0002, props.coordinate.latitude + .0002,
+        props.coordinate.longitude + .0003, props.coordinate.latitude + .0003,
+        props.coordinate.longitude + .0004, props.coordinate.latitude + .0004,
+
+    ]);
 
 
     return (
@@ -47,7 +56,17 @@ const City: React.FC<CityProps> = (props) => {
             >
 
                 <Camera position={position} direction={direction} />
-                <Entity position={position} point={pointGraphics} name={props.cityName} description="Hello, world." />
+                <Entity position={position} point={pointGraphics} name={props.cityName} description="one." />
+                <Entity position={position1} point={pointGraphics} name={props.cityName} description="two." />
+
+                <PolygonGraphics
+                    hierarchy={positionArray}
+                    height={1}
+                    material={Color.RED.withAlpha(0.5)}
+                    outline={true}
+                    outlineColor={Color.BLACK}
+                />
+
             </Viewer>
         </div>
     )
