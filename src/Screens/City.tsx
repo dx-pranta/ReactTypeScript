@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchData } from '../store/actions'
-import { Viewer, Entity, Camera, PolygonGraphics } from "resium";
-import { Cartesian3, createWorldTerrain, Color } from "cesium";
+import { Viewer, Entity, Camera, PolygonGraphics, Billboard, BillboardCollection } from "resium";
+import { Cartesian3, createWorldTerrain, Color, Transforms, PerspectiveOffCenterFrustum } from "cesium";
+import icon from '../assets/icon.png'
 const terrainProvider = createWorldTerrain();
+
 
 
 interface stateType {
@@ -38,6 +40,7 @@ const City: React.FC<CityProps> = (props) => {
 
     const position1 = Cartesian3.fromDegrees(props.coordinate.longitude + .001, props.coordinate.latitude + .001, 300);
     const direction = Cartesian3.fromDegrees(90, 180, 180);
+    const center = Cartesian3.fromDegrees(props.coordinate.longitude, props.coordinate.latitude);
     const pointGraphics = { pixelSize: 10 };
     const positionArray = Cartesian3.fromDegreesArray([
         props.coordinate.longitude + .0001, props.coordinate.latitude + .0001,
@@ -58,14 +61,27 @@ const City: React.FC<CityProps> = (props) => {
                 <Camera position={position} direction={direction} />
                 <Entity position={position} point={pointGraphics} name={props.cityName} description="one." />
                 <Entity position={position1} point={pointGraphics} name={props.cityName} description="two." />
+                {/* 
+                <Entity>
+                    <PolygonGraphics
+                        hierarchy={positionArray}
+                        height={1}
+                        material={Color.RED.withAlpha(0.5)}
+                        outline={true}
+                        outlineColor={Color.BLACK}
+                        show={true}
+                        outlineWidth={2}
+                    />
+                </Entity> */}
+                <BillboardCollection modelMatrix={Transforms.eastNorthUpToFixedFrame(center)}>
+                    <Billboard
+                        color={Color.RED}
+                        position={new Cartesian3(0.0, 1000000.0, 0.0)}
+                        image={icon}
+                        scale={0.1}
+                    />
+                </BillboardCollection>
 
-                <PolygonGraphics
-                    hierarchy={positionArray}
-                    height={1}
-                    material={Color.RED.withAlpha(0.5)}
-                    outline={true}
-                    outlineColor={Color.BLACK}
-                />
 
             </Viewer>
         </div>
